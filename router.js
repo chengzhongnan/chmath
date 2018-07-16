@@ -4,9 +4,14 @@ const Router = require('koa-router');
 
 const router = new Router();
 
+let servercount = 0;
+
+setInterval(() => {
+    servercount += 1;
+}, 1000);
+
 router.get(/.*/, async (ctx, next) => {
-    console.log(`[${(new Date).toLocaleString()}][GET][${ctx.ip}]:${ctx.req.url}`);
-    await next();
+    ctx.body = '当前计数是：' + servercount;
 })
 
 module.exports = router;
