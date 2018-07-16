@@ -1,28 +1,33 @@
 'use strict';
 
-const Koa = require('koa');
-const router = require('./router');
-const path = require('path');
-const staticPath = require('koa-static');
-const bodyParser = require('koa-bodyparser');
-const setting = require('./setting');
-const cors = require('koa2-cors');
+try {
 
-const app = new Koa();
+    const Koa = require('koa');
+    const router = require('./router');
+    const path = require('path');
+    const staticPath = require('koa-static');
+    const bodyParser = require('koa-bodyparser');
+    const setting = require('./setting');
+    const cors = require('koa2-cors');
 
-// app.keys = ['nodejs session key for gameweb']; // needed for cookie-signing
+    const app = new Koa();
 
-// app.use(session({
-//     store: mongoStore.create({
-//         url: setting.mongo.url + '/session',
-//         expiration: 1000 * 60 * 60 * 24 * 14
-//     })
-// }));
+    // app.keys = ['nodejs session key for gameweb']; // needed for cookie-signing
 
-app.use(cors());
-app.use(router.routes()).use(router.allowedMethods());
+    // app.use(session({
+    //     store: mongoStore.create({
+    //         url: setting.mongo.url + '/session',
+    //         expiration: 1000 * 60 * 60 * 24 * 14
+    //     })
+    // }));
+
+    app.use(cors());
+    app.use(router.routes()).use(router.allowedMethods());
 
 
-app.use(staticPath('./public'));
+    app.use(staticPath('./public'));
 
-app.listen(process.env.PORT || 8080);
+    app.listen(process.env.PORT || 8080);
+} catch (e) {
+    console.error(e);
+}
