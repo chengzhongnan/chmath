@@ -25,4 +25,4 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.use(staticPath('./public'));
 
-app.listen(80);
+app.listen(process.env.PORT || 8080);
